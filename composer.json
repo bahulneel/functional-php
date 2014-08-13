@@ -1,0 +1,22 @@
+{
+    "name": "bahulneel/immutable-php",
+    "description": "Immutable and persistent data structures for PHP",
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Neel Upadhyaya",
+            "email": "bahulneel@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-0": {
+            "Immutable\\": "./src"
+        }
+    }
+}
