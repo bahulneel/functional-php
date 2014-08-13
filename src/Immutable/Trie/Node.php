@@ -20,7 +20,11 @@ class Node extends SplFixedArray
         }
 
         if (empty($path)) {
-            $newNode[$position] = $leaf;
+            if ($leaf instanceof Leaf) {
+                $newNode[$position] = $leaf;
+            } else {
+                unset($newNode[$position]);
+            }
             return $newNode;
         }
 

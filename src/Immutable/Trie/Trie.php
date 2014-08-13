@@ -44,6 +44,14 @@ class Trie
         return $default;
     }
     
+    public function remove($index)
+    {
+        $path = $this->getPath($index);
+        $trie = new Trie;
+        $trie->root = $this->root->put(null, $path);
+        return $trie;
+    }
+
     public function getRoot()
     {
         return $this->root;
