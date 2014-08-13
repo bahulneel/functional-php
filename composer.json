@@ -2,7 +2,8 @@
     "name": "bahulneel/immutable-php",
     "description": "Immutable and persistent data structures for PHP",
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "athletic/athletic": "~0.1"
     },
     "license": "MIT",
     "authors": [
