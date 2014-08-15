@@ -3,17 +3,24 @@ namespace Functional\Protocol;
 
 use Functional\HandlerMap;
 
-class Protocol
+trait Protocol
 {
     /**
      * @var HandlerMap
      */
     private static $implementations;
 
+    private static $interfaces;
+
     private static function init()
     {
         if (!self::$implementations) {
             self::$implementations = new HandlerMap();
+        }
+        if (!self::$interfaces) {
+            $class = new \ReflectionClass(__CLASS__);
+            $interfaces = $class->getInterfaceNames();
+            self::$interfaces = $interfaces;
         }
     }
 
@@ -28,6 +35,12 @@ class Protocol
     public static function extend($type, $handler)
     {
         self::init();
+        $class = new \ReflectionClass($handler);
+        foreach (self::$interfaces as $interface) {
+            if (!$class->implementsInterface($interface)) {
+                throw new \InvalidArgumentException("Implementation must implement " . $interface);
+            }
+        }
         self::$implementations->addHandler($type, $handler);
     }
 }

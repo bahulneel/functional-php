@@ -1,8 +1,10 @@
 <?php
 namespace Functional\Protocol;
 
-class Sequence extends Protocol implements SequenceInterface 
+class Sequence implements SequenceInterface 
 {
+    use Protocol;
+
     public static function first($coll)
     {
         return self::invoke(__FUNCTION__, func_get_args());
