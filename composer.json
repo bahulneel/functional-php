@@ -19,6 +19,9 @@
         "psr-0": {
             "Immutable\\": "./src",
             "Functional\\": "./src"
-        }
+        },
+        "files": [
+            "src/protocols/all.php"
+        ]
     }
 }
