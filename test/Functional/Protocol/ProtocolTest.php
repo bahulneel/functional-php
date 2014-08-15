@@ -2,6 +2,7 @@
 namespace Functional\Protocol;
 
 use ArrayObject;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 
 class ProtocolTest extends PHPUnit_Framework_TestCase
@@ -11,6 +12,14 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
         Sequence::extend("array", "Functional\Protocol\ArraySequence");
         Sequence::extend("NULL", "Functional\Protocol\NullSequence");
         Sequence::extend("ArrayObject", "Functional\Protocol\ArrayObjectSequence");
+    }
+    
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testBadProtocol()
+    {
+        BadProtocol::extend("ArrayObject", "Functional\Protocol\BadSequence");
     }
     
     /**
@@ -40,11 +49,6 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, Sequence::first($array));
         $this->assertEquals([2, 3, 4], Sequence::rest($array)->getArrayCopy());
     }
-}
-
-class BadSequence
-{
-    
 }
 
 class ArraySequence implements SequenceInterface
@@ -86,3 +90,14 @@ class NullSequence implements SequenceInterface
     }
 
 }
+
+class BadProtocol
+{
+    use Protocol;
+}
+
+class BadSequence
+{
+    
+}
+

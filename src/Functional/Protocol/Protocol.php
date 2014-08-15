@@ -20,6 +20,9 @@ trait Protocol
         if (!self::$interfaces) {
             $class = new \ReflectionClass(__CLASS__);
             $interfaces = $class->getInterfaceNames();
+            if (!count($interfaces)) {
+                throw new \RuntimeException('Protocol must implement at least one interface');
+            }
             self::$interfaces = $interfaces;
         }
     }
