@@ -1,5 +1,4 @@
-<?php
-namespace BahulNeel\Immutable\Trie;
+<?php namespace BahulNeel\Immutable\Trie;
 
 class Trie
 {
@@ -22,6 +21,7 @@ class Trie
             $offset = ($index >> $shifts) & 0x1f;
             array_unshift($path, $offset);
         }
+
         return $path;
     }
 
@@ -29,8 +29,9 @@ class Trie
     {
         $path = $this->getPath($index);
         $leaf = new Leaf($index, $value);
-        $trie = new Trie;
+        $trie = new Trie();
         $trie->root = $this->root->put($leaf, $path);
+
         return $trie;
     }
 
@@ -41,14 +42,16 @@ class Trie
         if ($value instanceof Leaf) {
             return $value->getValue();
         }
+
         return $default;
     }
-    
+
     public function remove($index)
     {
         $path = $this->getPath($index);
-        $trie = new Trie;
+        $trie = new Trie();
         $trie->root = $this->root->put(null, $path);
+
         return $trie;
     }
 

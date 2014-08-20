@@ -13,8 +13,10 @@
     "homepage": "http://github.com/bahulneel/phonon",
     "require-dev": {
         "phpunit/phpunit": "*",
-        "athletic/athletic": "~0.1",
-        "sebastian/hhvm-wrapper": "*"
+        "sebastian/hhvm-wrapper": "*",
+        "squizlabs/php_codesniffer": "*",
+        "phpmd/phpmd": "*",
+        "fabpot/php-cs-fixer": "*"
     },
     "license": "MIT",
     "authors": [

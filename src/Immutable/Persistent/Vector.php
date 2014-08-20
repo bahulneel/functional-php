@@ -1,5 +1,4 @@
-<?php
-namespace BahulNeel\Immutable\Persistent;
+<?php namespace BahulNeel\Immutable\Persistent;
 
 use ArrayAccess;
 use BahulNeel\Immutable\Trie\Trie;
@@ -9,16 +8,16 @@ use OutOfBoundsException;
 
 class Vector implements Countable, ArrayAccess
 {
+
     /**
      * @var Trie
      */
     private $trie;
-
     private $count;
 
     public function __construct(array $array = [])
     {
-        $trie = new Trie;
+        $trie = new Trie();
         $length = count($array);
         for ($i = 0; $i < $length; ++$i) {
             $trie = $trie->put($i, $array[$i]);
@@ -29,20 +28,21 @@ class Vector implements Countable, ArrayAccess
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed  $value
      * @return Vector
      */
     public function append($value)
     {
-        $vector = new Vector;
+        $vector = new Vector();
         $vector->trie = $this->trie->put($this->count, $value);
         $vector->count = $this->count + 1;
+
         return $vector;
     }
 
     /**
-     * @param integer $index
-     * @param moxed $value
+     * @param  integer              $index
+     * @param  mixed                $value
      * @return Vector
      * @throws OutOfBoundsException
      */
@@ -51,13 +51,14 @@ class Vector implements Countable, ArrayAccess
         if ($index === $this->count) {
             return $this->append($value);
         }
-        
+
         if ($index > $this->count) {
             throw new OutOfBoundsException('Cannot assoc pased the end of the vector');
         }
-        $vector = new Vector;
+        $vector = new Vector();
         $vector->trie = $this->trie->put($index, $value);
         $vector->count = $this->count;
+
         return $vector;
     }
 
@@ -68,15 +69,16 @@ class Vector implements Countable, ArrayAccess
     {
         return $this[$this->count - 1];
     }
-    
+
     /**
      * @return Vector
      */
     public function pop()
     {
-        $vector = new Vector;
+        $vector = new Vector();
         $vector->trie = $this->trie->remove($this->count - 1);
         $vector->count = $this->count - 1;
+
         return $vector;
     }
 
@@ -91,6 +93,7 @@ class Vector implements Countable, ArrayAccess
         if ($value === $this) {
             return false;
         }
+
         return true;
     }
 
@@ -108,5 +111,4 @@ class Vector implements Countable, ArrayAccess
     {
         throw new LogicException('Cannot unset and immutable value');
     }
-
 }
