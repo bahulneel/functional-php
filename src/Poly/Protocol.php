@@ -1,5 +1,5 @@
 <?php
-namespace BahulNeel\Functional;
+namespace BahulNeel\Poly;
 
 use InvalidArgumentException;
 use ReflectionClass;

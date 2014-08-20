@@ -30,7 +30,7 @@
     "autoload": {
         "psr-4": {
             "BahulNeel\\Immutable\\": "./src/Immutable/",
-            "BahulNeel\\Functional\\": "./src/Functional/"
+            "BahulNeel\\Poly\\": "./src/Poly/"
         }
     }
 }
