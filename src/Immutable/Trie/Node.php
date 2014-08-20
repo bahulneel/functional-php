@@ -18,7 +18,7 @@ class Node extends SplFixedArray
         } else {
             $newNode = clone($this);
         }
-
+        
         if (empty($path)) {
             if ($leaf instanceof Leaf) {
                 $newNode[$position] = $leaf;
@@ -28,7 +28,7 @@ class Node extends SplFixedArray
             return $newNode;
         }
 
-        if (!isset($newNode[$position])) {
+        if (!isset($newNode[$position]) || !$newNode[$position] instanceof Node) {
             $newNode[$position] = new Node($this->getSize());
         }
 
@@ -41,7 +41,7 @@ class Node extends SplFixedArray
     public function get($path)
     {
         $position = array_pop($path);
-        if (!isset($this[$position])) {
+        if (!isset($this[$position]) || !$this[$position]) {
             return null;
         }
 
