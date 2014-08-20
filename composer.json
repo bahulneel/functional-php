@@ -10,7 +10,7 @@
         "protocols",
         "composition"
     ],
-    "homepage": "http://github.com/Seldaek/monolog",
+    "homepage": "http://github.com/bahulneel/phonon",
     "require-dev": {
         "phpunit/phpunit": "*",
         "athletic/athletic": "~0.1",
