@@ -3,7 +3,8 @@
     "description": "Immutable and persistent data structures for PHP",
     "require-dev": {
         "phpunit/phpunit": "*",
-        "athletic/athletic": "~0.1"
+        "athletic/athletic": "~0.1",
+        "sebastian/hhvm-wrapper": "*"
     },
     "license": "MIT",
     "authors": [
