@@ -1,9 +1,9 @@
 <?php
-namespace Immutable\Persistent;
+namespace BahulNeel\Immutable\Persistent;
 
 use ArrayAccess;
+use BahulNeel\Immutable\Trie\Trie;
 use Countable;
-use Immutable\Trie\Trie;
 use LogicException;
 use OutOfBoundsException;
 

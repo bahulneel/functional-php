@@ -1,5 +1,5 @@
 <?php
-namespace Functional;
+namespace BahulNeel\Functional;
 
 class MultiMethodTest extends \PHPUnit_Framework_TestCase
 {

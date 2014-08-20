@@ -1,5 +1,5 @@
 <?php
-namespace Immutable\Persistent;
+namespace BahulNeel\Immutable\Persistent;
 
 use PHPUnit_Framework_TestCase;
 

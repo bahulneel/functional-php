@@ -1,8 +1,8 @@
 <?php
-namespace Immutable\Benchmarks\Persistent;
+namespace BahulNeel\Immutable\Benchmarks\Persistent;
 
 use Athletic\AthleticEvent;
-use Immutable\Persistent\Vector;
+use BahulNeel\Immutable\Persistent\Vector;
 
 class VectorEvent extends AthleticEvent
 {

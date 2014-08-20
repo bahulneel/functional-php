@@ -1,5 +1,5 @@
 <?php
-namespace Functional;
+namespace BahulNeel\Functional;
 
 abstract class MultiMethod
 {

@@ -1,7 +1,10 @@
 <?php
-namespace Functional\Protocol;
+namespace BahulNeel\Functional\Protocol;
 
-use Functional\HandlerMap;
+use BahulNeel\Functional\HandlerMap;
+use InvalidArgumentException;
+use ReflectionClass;
+use RuntimeException;
 
 trait Protocol
 {
@@ -18,10 +21,10 @@ trait Protocol
             self::$implementations = new HandlerMap();
         }
         if (!self::$interfaces) {
-            $class = new \ReflectionClass(__CLASS__);
+            $class = new ReflectionClass(__CLASS__);
             $interfaces = $class->getInterfaceNames();
             if (!count($interfaces)) {
-                throw new \RuntimeException('Protocol must implement at least one interface');
+                throw new RuntimeException('Protocol must implement at least one interface');
             }
             self::$interfaces = $interfaces;
         }
@@ -38,10 +41,10 @@ trait Protocol
     public static function extend($type, $handler)
     {
         self::init();
-        $class = new \ReflectionClass($handler);
+        $class = new ReflectionClass($handler);
         foreach (self::$interfaces as $interface) {
             if (!$class->implementsInterface($interface)) {
-                throw new \InvalidArgumentException("Implementation must implement " . $interface);
+                throw new InvalidArgumentException("Implementation must implement " . $interface);
             }
         }
         self::$implementations->addHandler($type, $handler);
