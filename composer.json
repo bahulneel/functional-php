@@ -2,7 +2,9 @@
     "name": "bahulneel/immutable-php",
     "description": "Immutable and persistent data structures for PHP",
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "athletic/athletic": "~0.1",
+        "sebastian/hhvm-wrapper": "*"
     },
     "license": "MIT",
     "authors": [
@@ -12,11 +14,12 @@
         }
     ],
     "require": {
-
+        "zeptech/annotations": "1.1.*"
     },
     "autoload": {
-        "psr-0": {
-            "Immutable\\": "./src"
+        "psr-4": {
+            "BahulNeel\\Immutable\\": "./src/Immutable/",
+            "BahulNeel\\Functional\\": "./src/Functional/"
         }
     }
 }

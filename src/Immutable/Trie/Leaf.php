@@ -1,5 +1,5 @@
 <?php
-namespace Immutable\Trie;
+namespace BahulNeel\Immutable\Trie;
 
 class Leaf
 {
@@ -10,11 +10,6 @@ class Leaf
     {
         $this->index = $index;
         $this->value = $value;
-    }
-    
-    public function getIndex()
-    {
-        return $this->index;
     }
     
     public function getValue()

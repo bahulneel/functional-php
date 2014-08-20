@@ -1,5 +1,5 @@
 <?php
-namespace Immutable\Trie;
+namespace BahulNeel\Immutable\Trie;
 
 use PHPUnit_Framework_TestCase;
 
@@ -85,5 +85,13 @@ class TrieTest extends PHPUnit_Framework_TestCase
         $node10 = $trie1->getRoot()->get($path0);
         $node20 = $trie2->getRoot()->get($path0);
         $this->assertSame($node10, $node20);
+    }
+    
+    public function testRemove()
+    {
+        $trie1 = (new Trie)->put(0, 0);
+        $trie2 = (new Trie)->remove(0);
+        $this->assertSame(0, $trie1->get(0));
+        $this->assertNull($trie2->get(0));
     }
 }

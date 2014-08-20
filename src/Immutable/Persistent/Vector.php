@@ -1,10 +1,11 @@
 <?php
-namespace Immutable\Persistent;
+namespace BahulNeel\Immutable\Persistent;
 
 use ArrayAccess;
+use BahulNeel\Immutable\Trie\Trie;
 use Countable;
-use Immutable\Trie\Trie;
 use LogicException;
+use OutOfBoundsException;
 
 class Vector implements Countable, ArrayAccess
 {
@@ -15,7 +16,7 @@ class Vector implements Countable, ArrayAccess
 
     private $count;
 
-    public function __construct($array = [])
+    public function __construct(array $array = [])
     {
         $trie = new Trie;
         $length = count($array);
@@ -35,10 +36,16 @@ class Vector implements Countable, ArrayAccess
     {
         $vector = new Vector;
         $vector->trie = $this->trie->put($this->count, $value);
-        $vector->trie->count = $this->count++;
+        $vector->count = $this->count + 1;
         return $vector;
     }
 
+    /**
+     * @param integer $index
+     * @param moxed $value
+     * @return Vector
+     * @throws OutOfBoundsException
+     */
     public function assoc($index, $value)
     {
         if ($index === $this->count) {
@@ -46,11 +53,30 @@ class Vector implements Countable, ArrayAccess
         }
         
         if ($index > $this->count) {
-            throw new \OutOfBoundsException('Cannot assoc pased the end of the vector');
+            throw new OutOfBoundsException('Cannot assoc pased the end of the vector');
         }
         $vector = new Vector;
         $vector->trie = $this->trie->put($index, $value);
-        $vector->trie->count = $this->count;
+        $vector->count = $this->count;
+        return $vector;
+    }
+
+    /**
+     * @return Mixed
+     */
+    public function peek()
+    {
+        return $this[$this->count - 1];
+    }
+    
+    /**
+     * @return Vector
+     */
+    public function pop()
+    {
+        $vector = new Vector;
+        $vector->trie = $this->trie->remove($this->count - 1);
+        $vector->count = $this->count - 1;
         return $vector;
     }
 

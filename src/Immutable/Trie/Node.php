@@ -1,5 +1,5 @@
 <?php
-namespace Immutable\Trie;
+namespace BahulNeel\Immutable\Trie;
 
 use SplFixedArray;
 
@@ -18,13 +18,17 @@ class Node extends SplFixedArray
         } else {
             $newNode = clone($this);
         }
-
+        
         if (empty($path)) {
-            $newNode[$position] = $leaf;
+            if ($leaf instanceof Leaf) {
+                $newNode[$position] = $leaf;
+            } else {
+                unset($newNode[$position]);
+            }
             return $newNode;
         }
 
-        if (!isset($newNode[$position])) {
+        if (!isset($newNode[$position]) || !$newNode[$position] instanceof Node) {
             $newNode[$position] = new Node($this->getSize());
         }
 
@@ -37,7 +41,7 @@ class Node extends SplFixedArray
     public function get($path)
     {
         $position = array_pop($path);
-        if (!isset($this[$position])) {
+        if (!isset($this[$position]) || !$this[$position]) {
             return null;
         }
 
