@@ -11,13 +11,13 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-            Sequence::extend("array", "BahulNeel\Functional\ArraySequence");
-            Sequence::extend("NULL", "BahulNeel\Functional\NullSequence");
+            Sequence::extend(gettype([]), "BahulNeel\Functional\ArraySequence");
+            Sequence::extend(gettype(null), "BahulNeel\Functional\NullSequence");
             Sequence::extend("ArrayObject", "BahulNeel\Functional\ArrayObjectSequence");
         } else {
-            Sequence::extend("array", ArraySequence::class);
-            Sequence::extend("NULL", NullSequence::class);
-            Sequence::extend("ArrayObject", ArrayObjectSequence::class);
+            Sequence::extend(gettype([]), ArraySequence::class);
+            Sequence::extend(gettype(null), NullSequence::class);
+            Sequence::extend(ArrayObject::class, ArrayObjectSequence::class);
         }
     }
 
