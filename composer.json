@@ -1,6 +1,16 @@
 {
-    "name": "bahulneel/immutable-php",
-    "description": "Immutable and persistent data structures for PHP",
+    "name": "bahulneel/phonon",
+    "description": "Interesting concepts half-inched from other languages",
+    "type": "library",
+    "keywords": [
+        "functional",
+        "immutable",
+        "data structures",
+        "multi-methods",
+        "protocols",
+        "composition"
+    ],
+    "homepage": "http://github.com/Seldaek/monolog",
     "require-dev": {
         "phpunit/phpunit": "*",
         "athletic/athletic": "~0.1",
@@ -14,6 +24,7 @@
         }
     ],
     "require": {
+        "php": ">=5.4.0",
         "zeptech/annotations": "1.1.*"
     },
     "autoload": {
