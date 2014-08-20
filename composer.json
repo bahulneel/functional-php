@@ -13,11 +13,12 @@
         }
     ],
     "require": {
-
+        "zeptech/annotations": "1.1.*"
     },
     "autoload": {
         "psr-0": {
-            "Immutable\\": "./src"
+            "Immutable\\": "./src",
+            "Functional\\": "./src"
         }
     }
 }

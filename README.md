@@ -1,4 +1,4 @@
-immutable-php
-=============
+functional-php
+==============
 
-Immutable datastructures for php
+
