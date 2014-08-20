@@ -1,5 +1,5 @@
 <?php
-namespace BahulNeel\Functional\Protocol;
+namespace BahulNeel\Functional;
 
 use ArrayObject;
 use InvalidArgumentException;
@@ -9,9 +9,9 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        Sequence::extend("array", "BahulNeel\Functional\Protocol\ArraySequence");
-        Sequence::extend("NULL", "BahulNeel\Functional\Protocol\NullSequence");
-        Sequence::extend("ArrayObject", "BahulNeel\Functional\Protocol\ArrayObjectSequence");
+        Sequence::extend("array", "BahulNeel\Functional\ArraySequence");
+        Sequence::extend("NULL", "BahulNeel\Functional\NullSequence");
+        Sequence::extend("ArrayObject", "BahulNeel\Functional\ArrayObjectSequence");
     }
     
     /**
@@ -19,7 +19,7 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
      */
     public function testBadProtocol()
     {
-        BadProtocol::extend("ArrayObject", "BahulNeel\Functional\Protocol\BadSequence");
+        BadProtocol::extend("ArrayObject", "BahulNeel\Functional\BadSequence");
     }
     
     /**
@@ -27,7 +27,7 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
      */
     public function testBadSequence()
     {
-        Sequence::extend("ArrayObject", "BahulNeel\Functional\Protocol\BadSequence");
+        Sequence::extend("ArrayObject", "BahulNeel\Functional\BadSequence");
     }
     
     public function testArray()

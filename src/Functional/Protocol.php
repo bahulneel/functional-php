@@ -1,7 +1,6 @@
 <?php
-namespace BahulNeel\Functional\Protocol;
+namespace BahulNeel\Functional;
 
-use BahulNeel\Functional\HandlerMap;
 use InvalidArgumentException;
 use ReflectionClass;
 use RuntimeException;
