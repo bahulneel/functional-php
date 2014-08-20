@@ -1,20 +1,21 @@
-<?php
-namespace BahulNeel\Functional;
+<?php namespace BahulNeel\Poly;
 
 class HandlerMap
 {
+
     protected $handlers = [];
 
     public function addHandler($type, $handler)
     {
         $this->handlers[$type] = $handler;
     }
-    
+
     public function getHandlerByName($type)
     {
         if (!isset($this->handlers[$type])) {
             throw new \InvalidArgumentException("Unknown handler for " . $type);
         }
+
         return $this->handlers[$type];
     }
 
@@ -28,6 +29,7 @@ class HandlerMap
         while (true) {
             try {
                 $handler = $this->getHandlerByName($class);
+
                 return $handler;
             } catch (\Exception $ex) {
                 $class = get_parent_class($class);
@@ -35,6 +37,6 @@ class HandlerMap
                     throw $ex;
                 }
             }
-        }        
+        }
     }
 }

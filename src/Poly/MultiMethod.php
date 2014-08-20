@@ -1,8 +1,8 @@
-<?php
-namespace BahulNeel\Functional;
+<?php namespace BahulNeel\Poly;
 
 abstract class MultiMethod
 {
+
     private $bindings;
 
     final public function __construct()
@@ -30,6 +30,7 @@ abstract class MultiMethod
             }
             $bindings[$key] = $method->getName();
         }
+
         return $bindings;
     }
 
@@ -37,21 +38,22 @@ abstract class MultiMethod
     {
         $args = func_get_args();
         $key = $this->getKey($args);
-        
+
         if (isset($this->bindings[$key])) {
             return call_user_func_array(array($this, $this->bindings[$key]), $args);
         }
-        
+
         if (method_exists($this, '_default')) {
             return call_user_func_array(array($this, '_default'), $args);
         }
         throw new \InvalidArgumentException('No binding for key ' . $key);
     }
-    
+
     public static function call()
     {
         $args = func_get_args();
-        $impl = new static;
+        $impl = new static();
+
         return call_user_func_array($impl, $args);
     }
 }

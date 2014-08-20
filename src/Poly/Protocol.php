@@ -1,17 +1,16 @@
-<?php
-namespace BahulNeel\Functional;
+<?php namespace BahulNeel\Poly;
 
 use InvalidArgumentException;
 use ReflectionClass;
-use RuntimeException;
+use Symfony\Component\Yaml\Exception\RuntimeException;
 
 trait Protocol
 {
+
     /**
      * @var HandlerMap
      */
     private static $implementations;
-
     private static $interfaces;
 
     private static function init()
@@ -34,9 +33,10 @@ trait Protocol
         self::init();
         $first = $args[0];
         $handler = self::$implementations->getHandler($first);
+
         return call_user_func_array(array($handler, $method), $args);
     }
-    
+
     public static function extend($type, $handler)
     {
         self::init();
