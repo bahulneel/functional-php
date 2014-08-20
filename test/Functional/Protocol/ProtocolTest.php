@@ -51,6 +51,28 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
     }
 }
 
+interface SequenceInterface
+{
+    public static function first($coll);
+    
+    public static function rest($coll);
+}
+
+class Sequence implements SequenceInterface 
+{
+    use Protocol;
+
+    public static function first($coll)
+    {
+        return self::invoke(__FUNCTION__, func_get_args());
+    }
+    
+    public static function rest($coll)
+    {
+        return self::invoke(__FUNCTION__, func_get_args());
+    }
+}
+
 class ArraySequence implements SequenceInterface
 {
     public static function first($coll)
