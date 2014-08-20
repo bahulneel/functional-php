@@ -12,11 +12,6 @@ class Leaf
         $this->value = $value;
     }
     
-    public function getIndex()
-    {
-        return $this->index;
-    }
-    
     public function getValue()
     {
         return $this->value;
