@@ -10,7 +10,7 @@
         "protocols",
         "composition"
     ],
-    "homepage": "http://github.com/bahulneel/phonon",
+    "homepage": "http://bahulneel.github.io/phonon",
     "require-dev": {
         "phpunit/phpunit": "*",
         "sebastian/hhvm-wrapper": "*",
