@@ -1,5 +1,5 @@
 machine:
   php:
     version: 5.4.21
-  general:
-    artifacts: "build"
+general:
+  artifacts: "build"
