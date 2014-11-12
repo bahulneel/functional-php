@@ -7,22 +7,6 @@ use Phonon\Transducers\TransformerInterface;
 
 class ArrayReduce implements ReduceInterface
 {
-
-    public static function reduceAssoc($coll, TransformerInterface $xf, $init)
-    {
-        $result = $init;
-
-        foreach ($coll as $key => $value) {
-            $result = $xf->step($result, [$key, $value]);
-            if (Transducers::isReduced($result)) {
-                $result = Transducers::deref($result);
-                break;
-            }
-        }
-
-        return $xf->result($result);
-    }
-
     public static function reduceArray($coll, TransformerInterface $xf, $init)
     {
 
@@ -44,7 +28,7 @@ class ArrayReduce implements ReduceInterface
     {
         $isAssoc = Transducers::isAssoc($coll);
         if ($isAssoc) {
-            return self::reduceAssoc($coll, $xf, $init);
+            return TraversableReduce::reduce($coll, $xf, $init);
         } else {
             return self::reduceArray($coll, $xf, $init);
         }

@@ -4,18 +4,15 @@ namespace Phonon\Transducers\Reduce;
 use Phonon\Transducers\Transducers as t;
 use PHPUnit_Framework_TestCase;
 
-class ArrayTest extends PHPUnit_Framework_TestCase
+class ReduceTest extends PHPUnit_Framework_TestCase
 {
     public function testArrayIntoArray()
     {
         $actual = [1, 2, 3, 4];
-        $identity = function ($x) {
-            return $x;
-        };
 
         $expected = t::into(
             [],
-            t::map($identity),
+            t::map(t::identity()),
             $actual
         );
         
@@ -83,5 +80,45 @@ class ArrayTest extends PHPUnit_Framework_TestCase
         $result = t::intoAssoc([], t::map($upperKeys), $strings);
 
         $this->assertEquals($ucStrings, $result);
+    }
+
+    public function testMapTraverable()
+    {
+        $expected = [1, 2, 3, 4];
+        $arr = \SplFixedArray::fromArray($expected);
+
+        $actual = t::into(
+            [],
+            t::map(t::value()),
+            $arr
+        );
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testMapString()
+    {
+        $expected = ["H", "e", "l", "l", "o"];
+
+        $actual = t::into(
+            [],
+            t::map(t::identity()),
+            "Hello"
+        );
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testMapStringInto()
+    {
+        $expected = "Hello";
+
+        $actual = t::into(
+            "",
+            t::map(t::identity()),
+            ["H", "e", "l", "l", "o"]
+        );
+
+        $this->assertEquals($expected, $actual);
     }
 }

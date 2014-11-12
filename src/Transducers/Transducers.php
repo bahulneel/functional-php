@@ -2,7 +2,10 @@
 namespace Phonon\Transducers;
 
 Reduce::extend(gettype([]), "\Phonon\Transducers\Reduce\ArrayReduce");
+Reduce::extend(gettype(""), "\Phonon\Transducers\Reduce\StringReduce");
+Reduce::extend("Traversable", "\Phonon\Transducers\Reduce\TraversableReduce");
 Into::extend(gettype([]), "\Phonon\Transducers\Into\ArrayInto");
+Into::extend(gettype(""), "\Phonon\Transducers\Into\StringInto");
 
 class Transducers
 {
@@ -181,5 +184,26 @@ class Transducers
             $empty,
             $coll
         );
+    }
+
+    public static function identity()
+    {
+        return function ($x) {
+            return $x;
+        };
+    }
+
+    public static function key()
+    {
+        return function (array $x) {
+            return $x[0];
+        };
+    }
+
+    public static function value()
+    {
+        return function (array $x) {
+            return $x[1];
+        };
     }
 }
