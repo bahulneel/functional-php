@@ -32,7 +32,8 @@
     "autoload": {
         "psr-4": {
             "Phonon\\Immutable\\": "./src/Immutable/",
-            "Phonon\\Poly\\": "./src/Poly/"
+            "Phonon\\Poly\\": "./src/Poly/",
+            "Phonon\\Schema\\": "./src/Schema/"
         }
     }
 }
