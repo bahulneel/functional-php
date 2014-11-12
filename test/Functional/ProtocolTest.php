@@ -1,5 +1,5 @@
 <?php
-namespace BahulNeel\Poly;
+namespace Phonon\Poly;
 
 use ArrayObject;
 use InvalidArgumentException;
@@ -10,9 +10,9 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        Sequence::extend(gettype([]), "BahulNeel\Poly\ArraySequence");
-        Sequence::extend(gettype(null), "BahulNeel\Poly\NullSequence");
-        Sequence::extend("ArrayObject", "BahulNeel\Poly\ArrayObjectSequence");
+        Sequence::extend(gettype([]), "Phonon\Poly\ArraySequence");
+        Sequence::extend(gettype(null), "Phonon\Poly\NullSequence");
+        Sequence::extend("ArrayObject", "Phonon\Poly\ArrayObjectSequence");
     }
 
     /**
@@ -20,7 +20,7 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
      */
     public function testBadProtocol()
     {
-        BadProtocol::extend("ArrayObject", "BahulNeel\Poly\BadSequence");
+        BadProtocol::extend("ArrayObject", "Phonon\Poly\BadSequence");
     }
 
     /**
@@ -28,7 +28,7 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
      */
     public function testBadSequence()
     {
-        Sequence::extend("ArrayObject", "BahulNeel\Poly\BadSequence");
+        Sequence::extend("ArrayObject", "Phonon\Poly\BadSequence");
     }
 
     public function testArray()

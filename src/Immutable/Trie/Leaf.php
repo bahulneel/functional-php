@@ -1,4 +1,4 @@
-<?php namespace BahulNeel\Immutable\Trie;
+<?php namespace Phonon\Immutable\Trie;
 
 class Leaf
 {

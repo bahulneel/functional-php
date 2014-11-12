@@ -1,4 +1,4 @@
-<?php namespace BahulNeel\Poly;
+<?php namespace Phonon\Poly;
 
 abstract class MultiMethod
 {

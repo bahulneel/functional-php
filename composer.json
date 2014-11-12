@@ -31,8 +31,8 @@
     },
     "autoload": {
         "psr-4": {
-            "BahulNeel\\Immutable\\": "./src/Immutable/",
-            "BahulNeel\\Poly\\": "./src/Poly/"
+            "Phonon\\Immutable\\": "./src/Immutable/",
+            "Phonon\\Poly\\": "./src/Poly/"
         }
     }
 }
