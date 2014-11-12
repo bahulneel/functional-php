@@ -1,6 +1,7 @@
 {
     "name": "bahulneel/phonon",
     "description": "Interesting concepts half-inched from other languages",
+    "version": "0.1.0",
     "type": "library",
     "keywords": [
         "functional",
