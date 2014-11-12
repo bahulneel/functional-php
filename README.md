@@ -15,6 +15,7 @@ At present we have support for the following concepts:
     - Protocols
  - Immutable data structures:
     - Persistent Vectors
+ - Transducers
 
 ## Runtime Polymorphism
 
