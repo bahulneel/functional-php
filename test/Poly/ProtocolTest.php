@@ -1,5 +1,5 @@
 <?php
-namespace BahulNeel\Poly;
+namespace Phonon\Poly;
 
 use ArrayObject;
 use InvalidArgumentException;
@@ -10,9 +10,9 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        Sequence::extend(gettype([]), "BahulNeel\Poly\ArraySequence");
-        Sequence::extend(gettype(null), "BahulNeel\Poly\NullSequence");
-        Sequence::extend("ArrayObject", "BahulNeel\Poly\ArrayObjectSequence");
+        Sequence::extend(gettype([]), "Phonon\Poly\ArraySequence");
+        Sequence::extend(gettype(null), "Phonon\Poly\NullSequence");
+        Sequence::extend("ArrayObject", "Phonon\Poly\ArrayObjectSequence");
     }
 
     /**
@@ -20,7 +20,7 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
      */
     public function testBadProtocol()
     {
-        BadProtocol::extend("ArrayObject", "BahulNeel\Poly\BadSequence");
+        BadProtocol::extend("ArrayObject", "Phonon\Poly\BadSequence");
     }
 
     /**
@@ -28,7 +28,7 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
      */
     public function testBadSequence()
     {
-        Sequence::extend("ArrayObject", "BahulNeel\Poly\BadSequence");
+        Sequence::extend("ArrayObject", "Phonon\Poly\BadSequence");
     }
 
     public function testArray()
@@ -49,6 +49,13 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
         $array = new ArrayObject([1, 2, 3, 4]);
         $this->assertEquals(1, Sequence::first($array));
         $this->assertEquals([2, 3, 4], Sequence::rest($array)->getArrayCopy());
+    }
+
+    public function testTraversable()
+    {
+        Sequence::extend("Traversable", "Phonon\Poly\TraversableSequence");
+        $array = \SplFixedArray::fromArray([1, 2]);
+        $this->assertEquals(1, Sequence::first($array));
     }
 
 }
@@ -105,6 +112,22 @@ class ArrayObjectSequence extends ArraySequence
         return new ArrayObject(Sequence::rest($coll->getArrayCopy()));
     }
 
+}
+
+class TraversableSequence implements SequenceInterface
+{
+
+    public static function rest($coll)
+    {
+        throw new \Exception("Cannot get rest of a traversable");
+    }
+
+    public static function first($coll)
+    {
+        foreach ($coll as $item) {
+            return $item;
+        }
+    }
 }
 
 class NullSequence implements SequenceInterface

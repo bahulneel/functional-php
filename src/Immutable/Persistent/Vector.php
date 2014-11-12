@@ -1,7 +1,7 @@
-<?php namespace BahulNeel\Immutable\Persistent;
+<?php namespace Phonon\Immutable\Persistent;
 
 use ArrayAccess;
-use BahulNeel\Immutable\Trie\Trie;
+use Phonon\Immutable\Trie\Trie;
 use Countable;
 use LogicException;
 use OutOfBoundsException;

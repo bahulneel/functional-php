@@ -1,4 +1,4 @@
-<?php namespace BahulNeel\Poly;
+<?php namespace Phonon\Poly;
 
 class HandlerMap
 {
@@ -26,17 +26,33 @@ class HandlerMap
         }
         $class = get_class($obj);
         $handler = null;
+        $ex = null;
         while (true) {
             try {
                 $handler = $this->getHandlerByName($class);
 
                 return $handler;
-            } catch (\Exception $ex) {
+            } catch (\Exception $e) {
+                if (!$ex) {
+                    $ex = $e;
+                }
                 $class = get_parent_class($class);
                 if (!$class) {
-                    throw $ex;
+                    break;
                 }
             }
         }
+        $rObj = new \ReflectionObject($obj);
+        $interfaces = $rObj->getInterfaceNames();
+        foreach ($interfaces as $interface) {
+            try {
+                $handler = $this->getHandlerByName($interface);
+
+                return $handler;
+            } catch (\Exception $e) {
+                continue;
+            }
+        }
+        throw $ex;
     }
 }

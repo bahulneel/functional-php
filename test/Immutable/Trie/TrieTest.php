@@ -1,5 +1,5 @@
 <?php
-namespace BahulNeel\Immutable\Trie;
+namespace Phonon\Immutable\Trie;
 
 use PHPUnit_Framework_TestCase;
 

@@ -10,7 +10,7 @@
         "protocols",
         "composition"
     ],
-    "homepage": "http://github.com/bahulneel/phonon",
+    "homepage": "http://bahulneel.github.io/phonon",
     "require-dev": {
         "phpunit/phpunit": "*",
         "sebastian/hhvm-wrapper": "*",
@@ -31,8 +31,10 @@
     },
     "autoload": {
         "psr-4": {
-            "BahulNeel\\Immutable\\": "./src/Immutable/",
-            "BahulNeel\\Poly\\": "./src/Poly/"
+            "Phonon\\Immutable\\": "./src/Immutable/",
+            "Phonon\\Poly\\": "./src/Poly/",
+            "Phonon\\Transducers\\": "./src/Transducers/",
+            "Phonon\\Schema\\": "./src/Schema/"
         }
     }
 }

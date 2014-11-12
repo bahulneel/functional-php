@@ -1,5 +1,5 @@
 <?php
-namespace BahulNeel\Poly;
+namespace Phonon\Poly;
 
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
