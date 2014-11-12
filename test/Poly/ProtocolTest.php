@@ -51,6 +51,13 @@ class ProtocolTest extends PHPUnit_Framework_TestCase
         $this->assertEquals([2, 3, 4], Sequence::rest($array)->getArrayCopy());
     }
 
+    public function testTraversable()
+    {
+        Sequence::extend("Traversable", "Phonon\Poly\TraversableSequence");
+        $array = \SplFixedArray::fromArray([1, 2]);
+        $this->assertEquals(1, Sequence::first($array));
+    }
+
 }
 
 interface SequenceInterface
@@ -105,6 +112,22 @@ class ArrayObjectSequence extends ArraySequence
         return new ArrayObject(Sequence::rest($coll->getArrayCopy()));
     }
 
+}
+
+class TraversableSequence implements SequenceInterface
+{
+
+    public static function rest($coll)
+    {
+        throw new \Exception("Cannot get rest of a traversable");
+    }
+
+    public static function first($coll)
+    {
+        foreach ($coll as $item) {
+            return $item;
+        }
+    }
 }
 
 class NullSequence implements SequenceInterface
