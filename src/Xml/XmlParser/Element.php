@@ -8,8 +8,7 @@ class Element implements \Phonon\Xml\XmlParserInterface
     public static function parse($xml)
     {
         /* @var $xml \DOMElement */
-        $element = [];
-        $element[] = $xml->tagName;
+        $element = [$xml->tagName];
         if ($xml->hasAttributes()) {
             $xf = t::comp(
                 t::map(t::value()),

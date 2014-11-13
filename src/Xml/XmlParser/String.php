@@ -9,7 +9,8 @@ class String implements XmlParserInterface
 {
     public static function parse($xml)
     {
-        $xml = DOMDocument::loadXML($xml);
-        return XmlParser::parse($xml);
+        $document = new DOMDocument;
+        $document->loadXML($xml);
+        return XmlParser::parse($document);
     }
 }
