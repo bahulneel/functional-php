@@ -35,7 +35,7 @@
             "Phonon\\Immutable\\": "./src/Immutable/",
             "Phonon\\Poly\\": "./src/Poly/",
             "Phonon\\Transducers\\": "./src/Transducers/",
-            "Phonon\\Schema\\": "./src/Schema/"
+            "Phonon\\Xml\\": "./src/Xml/"
         }
     }
 }

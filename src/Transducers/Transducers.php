@@ -202,8 +202,11 @@ class Transducers
 
     public static function value()
     {
-        return function (array $x) {
-            return $x[1];
+        return function ($x) {
+            if (is_array($x)) {
+                return $x[1];
+            }
+            return $x;
         };
     }
 }
