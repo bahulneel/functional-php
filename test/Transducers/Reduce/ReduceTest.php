@@ -82,7 +82,7 @@ class ReduceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ucStrings, $result);
     }
 
-    public function testMapTraverable()
+    public function testMapTraversable()
     {
         $expected = [1, 2, 3, 4];
         $arr = \SplFixedArray::fromArray($expected);
