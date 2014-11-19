@@ -251,7 +251,10 @@ class Transducers
     public static function get($key)
     {
         return function ($x) use ($key) {
-            return $x[$key];
+            if (isset($x[$key])) {
+                return $x[$key];
+            }
+            return null;
         };
     }
 
