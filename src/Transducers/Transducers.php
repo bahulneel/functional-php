@@ -98,6 +98,13 @@ class Transducers
         };
     }
 
+    public static function keep(callable $f)
+    {
+        return function (TransformerInterface $xf) use ($f) {
+            return new Transformer\Keep($f, $xf);
+        };
+    }
+
     public static function filter(callable $pred)
     {
         return function (TransformerInterface $xf) use ($pred) {

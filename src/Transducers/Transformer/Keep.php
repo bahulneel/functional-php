@@ -4,7 +4,7 @@ namespace Phonon\Transducers\Transformer;
 use Phonon\Transducers\TransformerInterface;
 
 
-class Map implements TransformerInterface
+class Keep implements TransformerInterface
 {
 
     private $f;
@@ -33,6 +33,11 @@ class Map implements TransformerInterface
 
     public function step($result, $input)
     {
-        return $this->xf->step($result, call_user_func($this->f, $input));
+        $v = call_user_func($this->f, $input);
+        if ($v === null) {
+            return $result;
+        } else {
+            return $this->xf->step($result, $v);
+        }
     }
 }
