@@ -168,7 +168,7 @@ class Transducers
         };
     }
 
-    public function cat()
+    public static function cat()
     {
         return function ($xf) {
             return new Transformer\Cat($xf);
