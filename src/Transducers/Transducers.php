@@ -228,10 +228,13 @@ class Transducers
         };
     }
 
-    public static function key($index = 0)
+    public static function key()
     {
         return function ($x) {
-            return $x[$index];
+            if ($x instanceof Pair) {
+                return $x[0];
+            }
+            throw new \RuntimeException('Not a key value pair');
         };
     }
 
@@ -242,6 +245,13 @@ class Transducers
                 return $x[1];
             }
             return $x;
+        };
+    }
+
+    public static function get($key)
+    {
+        return function ($x) use ($key) {
+            return $x[$key];
         };
     }
 
