@@ -3,6 +3,7 @@ namespace Phonon\Transducers;
 
 Reduce::extend(gettype([]), "\Phonon\Transducers\Reduce\ArrayReduce");
 Reduce::extend(gettype(""), "\Phonon\Transducers\Reduce\StringReduce");
+Reduce::extend("resource", "\Phonon\Transducers\Reduce\FileReduce");
 Reduce::extend("Traversable", "\Phonon\Transducers\Reduce\TraversableReduce");
 Into::extend(gettype([]), "\Phonon\Transducers\Into\ArrayInto");
 Into::extend(gettype(""), "\Phonon\Transducers\Into\StringInto");
