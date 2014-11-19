@@ -3,6 +3,7 @@ namespace Phonon\Transducers;
 
 Reduce::extend(gettype([]), "\Phonon\Transducers\Reduce\ArrayReduce");
 Reduce::extend(gettype(""), "\Phonon\Transducers\Reduce\StringReduce");
+Reduce::extend("resource", "\Phonon\Transducers\Reduce\FileReduce");
 Reduce::extend("Traversable", "\Phonon\Transducers\Reduce\TraversableReduce");
 Into::extend(gettype([]), "\Phonon\Transducers\Into\ArrayInto");
 Into::extend(gettype(""), "\Phonon\Transducers\Into\StringInto");
@@ -97,6 +98,13 @@ class Transducers
         };
     }
 
+    public static function keep(callable $f)
+    {
+        return function (TransformerInterface $xf) use ($f) {
+            return new Transformer\Keep($f, $xf);
+        };
+    }
+
     public static function filter(callable $pred)
     {
         return function (TransformerInterface $xf) use ($pred) {
@@ -146,7 +154,34 @@ class Transducers
         };
     }
 
-    /** Partition et al. **/
+    public static function partitionBy(callable $f)
+    {
+        return function (TransformerInterface $xf) use ($f) {
+            return new Transformer\PartitionBy($f, $xf);
+        };
+    }
+
+    public static function partitionAll($n)
+    {
+        return function (TransformerInterface $xf) use ($n) {
+            return new Transformer\PartitionAll($n, $xf);
+        };
+    }
+
+    public static function cat()
+    {
+        return function ($xf) {
+            return new Transformer\Cat($xf);
+        };
+    }
+
+    public static function mapcat(callable $f)
+    {
+        return self::comp(
+            self::map($f),
+            self::cat()
+        );
+    }
 
     public static function reduce($xf, $init, $coll)
     {
@@ -193,20 +228,30 @@ class Transducers
         };
     }
 
-    public static function key()
+    public static function key($index = 0)
     {
-        return function (array $x) {
-            return $x[0];
+        return function ($x) {
+            return $x[$index];
         };
     }
 
     public static function value()
     {
         return function ($x) {
-            if (is_array($x)) {
+            if ($x instanceof Pair) {
                 return $x[1];
             }
             return $x;
         };
     }
+
+    public static function none()
+    {
+        static $none;
+        if (!$none) {
+            $none = new \stdClass();
+        }
+        return $none;
+    }
+
 }

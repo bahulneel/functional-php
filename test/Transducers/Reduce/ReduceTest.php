@@ -82,7 +82,7 @@ class ReduceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($ucStrings, $result);
     }
 
-    public function testMapTraverable()
+    public function testMapTraversable()
     {
         $expected = [1, 2, 3, 4];
         $arr = \SplFixedArray::fromArray($expected);
@@ -119,6 +119,32 @@ class ReduceTest extends PHPUnit_Framework_TestCase
             ["H", "e", "l", "l", "o"]
         );
 
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testPartitionBy()
+    {
+        $expected = [[0,1],["foo","bar"],[2,3],["bar","baz"]];
+        $xf = t::partitionBy('is_string');
+
+        $actual = t::into([], $xf, [0,1,"foo","bar",2,3,"bar","baz"]);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testPartitionAll()
+    {
+        $expected = [[0,1,2],[3,4,5],[6]];
+        $xf = t::partitionAll(3);
+        $actual = t::into([], $xf, [0,1,2,3,4,5,6]);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testMapCat()
+    {
+        $input = [[0,1,2],[3,4,5],[6]];
+        $expected = [0,1,2,3,4,5,6];
+        $xf = t::mapcat(t::identity());
+        $actual = t::into([], $xf, $input);
         $this->assertEquals($expected, $actual);
     }
 }
