@@ -264,4 +264,17 @@ class Transducers
         return $none;
     }
 
+    public static function void(callable $f)
+    {
+        return function ($value) use ($f) {
+            $ex = null;
+            try {
+                $f($value);
+                $result = true;
+            } catch (\Exception $ex) {
+                $result = false;
+            }
+            return [$value, $result, $ex];
+        };
+    }
 }
