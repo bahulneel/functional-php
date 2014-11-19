@@ -3,6 +3,7 @@ namespace Phonon\Transducers;
 
 Reduce::extend(gettype([]), "\Phonon\Transducers\Reduce\ArrayReduce");
 Reduce::extend(gettype(""), "\Phonon\Transducers\Reduce\StringReduce");
+Reduce::extend("resource", "\Phonon\Transducers\Reduce\FileReduce");
 Reduce::extend("Traversable", "\Phonon\Transducers\Reduce\TraversableReduce");
 Into::extend(gettype([]), "\Phonon\Transducers\Into\ArrayInto");
 Into::extend(gettype(""), "\Phonon\Transducers\Into\StringInto");
@@ -94,6 +95,13 @@ class Transducers
     {
         return function (TransformerInterface $xf) use ($f) {
             return new Transformer\Map($f, $xf);
+        };
+    }
+
+    public static function keep(callable $f)
+    {
+        return function (TransformerInterface $xf) use ($f) {
+            return new Transformer\Keep($f, $xf);
         };
     }
 
@@ -193,17 +201,17 @@ class Transducers
         };
     }
 
-    public static function key()
+    public static function key($index = 0)
     {
-        return function (array $x) {
-            return $x[0];
+        return function ($x) {
+            return $x[$index];
         };
     }
 
     public static function value()
     {
         return function ($x) {
-            if (is_array($x)) {
+            if ($x instanceof Pair) {
                 return $x[1];
             }
             return $x;
