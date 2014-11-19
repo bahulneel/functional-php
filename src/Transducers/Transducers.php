@@ -194,17 +194,17 @@ class Transducers
         };
     }
 
-    public static function key()
+    public static function key($index = 0)
     {
-        return function (array $x) {
-            return $x[0];
+        return function ($x) {
+            return $x[$index];
         };
     }
 
     public static function value()
     {
         return function ($x) {
-            if (is_array($x)) {
+            if ($x instanceof Pair) {
                 return $x[1];
             }
             return $x;
