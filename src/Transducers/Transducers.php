@@ -264,7 +264,7 @@ class Transducers
         return $none;
     }
 
-    public static function void(callable $f)
+    public static function guard(callable $f)
     {
         return function ($value) use ($f) {
             $ex = null;
