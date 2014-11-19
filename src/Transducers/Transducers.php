@@ -154,7 +154,34 @@ class Transducers
         };
     }
 
-    /** Partition et al. **/
+    public static function partitionBy(callable $f)
+    {
+        return function (TransformerInterface $xf) use ($f) {
+            return new Transformer\PartitionBy($f, $xf);
+        };
+    }
+
+    public static function partitionAll($n)
+    {
+        return function (TransformerInterface $xf) use ($n) {
+            return new Transformer\PartitionAll($n, $xf);
+        };
+    }
+
+    public function cat()
+    {
+        return function ($xf) {
+            return new Transformer\Cat($xf);
+        };
+    }
+
+    public static function mapcat(callable $f)
+    {
+        return self::comp(
+            self::map($f),
+            self::cat()
+        );
+    }
 
     public static function reduce($xf, $init, $coll)
     {
@@ -217,4 +244,14 @@ class Transducers
             return $x;
         };
     }
+
+    public static function none()
+    {
+        static $none;
+        if (!$none) {
+            $none = new \stdClass();
+        }
+        return $none;
+    }
+
 }
