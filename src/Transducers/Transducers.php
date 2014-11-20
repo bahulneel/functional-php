@@ -251,7 +251,10 @@ class Transducers
     public static function get($key)
     {
         return function ($x) use ($key) {
-            return $x[$key];
+            if (isset($x[$key])) {
+                return $x[$key];
+            }
+            return null;
         };
     }
 
@@ -264,4 +267,17 @@ class Transducers
         return $none;
     }
 
+    public static function guard(callable $f)
+    {
+        return function ($value) use ($f) {
+            $ex = null;
+            try {
+                $f($value);
+                $result = true;
+            } catch (\Exception $ex) {
+                $result = false;
+            }
+            return [$value, $result, $ex];
+        };
+    }
 }
