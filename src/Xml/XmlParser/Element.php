@@ -12,7 +12,7 @@ class Element implements \Phonon\Xml\XmlParserInterface
         if ($xml->hasAttributes()) {
             $xf = t::comp(
                 t::map(t::value()),
-                t::map(function (\DOMAttr $attr) {
+                t::map(function(\DOMAttr $attr) {
                     return [$attr->name, $attr->value];
                 })
             );

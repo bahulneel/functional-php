@@ -25,6 +25,9 @@ class Trie
         return $path;
     }
 
+    /**
+     * @param integer $index
+     */
     public function put($index, $value)
     {
         $path = $this->getPath($index);
@@ -35,6 +38,9 @@ class Trie
         return $trie;
     }
 
+    /**
+     * @param \Phonon\Immutable\Persistent\Vector $default
+     */
     public function get($index, $default = null)
     {
         $path = $this->getPath($index);
@@ -46,6 +52,9 @@ class Trie
         return $default;
     }
 
+    /**
+     * @param integer $index
+     */
     public function remove($index)
     {
         $path = $this->getPath($index);

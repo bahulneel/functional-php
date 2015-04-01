@@ -59,7 +59,7 @@ class Transducers
 
     public static function complement(callable $f)
     {
-        return function () use ($f) {
+        return function() use ($f) {
             return !call_user_func_array($f, func_get_args());
         };
     }
@@ -73,7 +73,7 @@ class Transducers
             $f = $args[0];
             $g = $args[1];
 
-            return function () use ($f, $g) {
+            return function() use ($f, $g) {
                 $args = func_get_args();
                 
                 return call_user_func(
@@ -93,84 +93,84 @@ class Transducers
 
     public static function map(callable $f)
     {
-        return function (TransformerInterface $xf) use ($f) {
+        return function(TransformerInterface $xf) use ($f) {
             return new Transformer\Map($f, $xf);
         };
     }
 
     public static function keep(callable $f)
     {
-        return function (TransformerInterface $xf) use ($f) {
+        return function(TransformerInterface $xf) use ($f) {
             return new Transformer\Keep($f, $xf);
         };
     }
 
     public static function filter(callable $pred)
     {
-        return function (TransformerInterface $xf) use ($pred) {
+        return function(TransformerInterface $xf) use ($pred) {
             return new Transformer\Filter($pred, $xf);
         };
     }
 
     public static function remove(callable $pred)
     {
-        return function (TransformerInterface $xf) use ($pred) {
+        return function(TransformerInterface $xf) use ($pred) {
             return new Transformer\Filter(self::complement($pred), $xf);
         };
     }
 
     public static function take($n)
     {
-        return function (TransformerInterface $xf) use ($n) {
+        return function(TransformerInterface $xf) use ($n) {
             return new Transformer\Take($n, $xf);
         };
     }
 
     public static function takeWhile(callable $pred)
     {
-        return function (TransformerInterface $xf) use ($pred) {
+        return function(TransformerInterface $xf) use ($pred) {
             return new Transformer\TakeWhile($pred, $xf);
         };
     }
 
     public static function takeNth($n)
     {
-        return function (TransformerInterface $xf) use ($n) {
+        return function(TransformerInterface $xf) use ($n) {
             return new Transformer\TakeNth($n, $xf);
         };
     }
 
     public static function drop($n)
     {
-        return function (TransformerInterface $xf) use ($n) {
+        return function(TransformerInterface $xf) use ($n) {
             return new Transformer\Drop($n, $xf);
         };
     }
 
     public static function dropWhile(callable $pred)
     {
-        return function (TransformerInterface $xf) use ($pred) {
+        return function(TransformerInterface $xf) use ($pred) {
             return new Transformer\DropWhile($pred, $xf);
         };
     }
 
     public static function partitionBy(callable $f)
     {
-        return function (TransformerInterface $xf) use ($f) {
+        return function(TransformerInterface $xf) use ($f) {
             return new Transformer\PartitionBy($f, $xf);
         };
     }
 
     public static function partitionAll($n)
     {
-        return function (TransformerInterface $xf) use ($n) {
+        return function(TransformerInterface $xf) use ($n) {
             return new Transformer\PartitionAll($n, $xf);
         };
     }
 
     public static function cat()
     {
-        return function ($xf) {
+        return function($xf) {
             return new Transformer\Cat($xf);
         };
     }
@@ -191,6 +191,9 @@ class Transducers
         return Reduce::reduce($coll, $xf, $init);
     }
 
+    /**
+     * @param \Closure $f
+     */
     public static function transduce($xf, $f, $init, $coll)
     {
         if (is_callable($f)) {
@@ -202,16 +205,22 @@ class Transducers
         return self::reduce($xf, $init, $coll);
     }
 
+    /**
+     * @param \DOMNodeList $coll
+     */
     public static function into($empty, $xf, $coll)
     {
         return Into::into($empty, $xf, $coll);
     }
 
+    /**
+     * @param \DOMNamedNodeMap $coll
+     */
     public static function intoAssoc($empty, $xf, $coll)
     {
         return self::transduce(
             $xf,
-            function ($arr, $item) {
+            function($arr, $item) {
                 list($key, $value) = $item;
                 $arr[$key] = $value;
                 return $arr;
@@ -223,14 +232,14 @@ class Transducers
 
     public static function identity()
     {
-        return function ($x) {
+        return function($x) {
             return $x;
         };
     }
 
     public static function key()
     {
-        return function ($x) {
+        return function($x) {
             if ($x instanceof Pair) {
                 return $x[0];
             }
@@ -240,7 +249,7 @@ class Transducers
 
     public static function value()
     {
-        return function ($x) {
+        return function($x) {
             if ($x instanceof Pair) {
                 return $x[1];
             }
@@ -250,7 +259,7 @@ class Transducers
 
     public static function get($key)
     {
-        return function ($x) use ($key) {
+        return function($x) use ($key) {
             if (isset($x[$key])) {
                 return $x[$key];
             }
@@ -269,7 +278,7 @@ class Transducers
 
     public static function guard(callable $f)
     {
-        return function ($value) use ($f) {
+        return function($value) use ($f) {
             $ex = null;
             try {
                 $f($value);
