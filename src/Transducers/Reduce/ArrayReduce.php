@@ -10,7 +10,7 @@ class ArrayReduce implements ReduceInterface
     public static function reduceArray($coll, TransformerInterface $xf, $init)
     {
 
-        $result = array_reduce($coll, function ($result, $input) use ($xf) {
+        $result = array_reduce($coll, function($result, $input) use ($xf) {
             if (Transducers::isReduced($result)) {
                 return $result;
             }
